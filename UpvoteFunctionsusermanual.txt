@@ -1,0 +1,23 @@
+1.ObjectCore, Wallet, and Aptos:
+ObjectCore: A structure representing ownership. It's defined but not explicitly used in this code.
+Wallet: A resource representing a participant's wallet with an amount of tokens and the owner's address.
+Aptos: A resource representing a proposal with a name, proposer's address, and a count of upvotes.
+Global Variables:
+
+2.MAX_UPVOTES: The maximum number of upvotes a proposal needs to finish a round.
+UPVOTE_PRICE: The cost in tokens for a participant to upvote a proposal.
+ongoing_round: A variable to keep track of the current round and avoid parallel rounds.
+Functions:
+
+3.get_wallet Function:
+Participants use this function to create a wallet by providing an initial amount. The wallet is associated with the participant's address.
+
+4.create_proposal Function:
+Participants use this function to create a new proposal by providing a name. The proposer's address is recorded, and the initial upvotes count is set to 0.
+
+5.upvote_proposal Function:
+Participants use this function to upvote a proposal by providing the reference to the proposal and the amount of tokens. The function checks if the participant is not the proposer, validates 
+the amount, updates the participant's wallet, and increments the upvotes. If the maximum upvotes are reached, it triggers the handle_end_of_round function.
+
+6.handle_end_of_round Function:
+Called when a proposal reaches the maximum upvotes. Handles the end of the round by burning proposals, distributing rewards, and updating wallets. The winner receives the full reward, and other proposers receive half. Half of the reward goes to the dapp's wallet. The ongoing_round variable is incremented to prevent parallel rounds.
