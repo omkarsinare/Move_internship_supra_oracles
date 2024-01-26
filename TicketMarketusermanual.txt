@@ -1,0 +1,84 @@
+1.create_event Function:
+Purpose: This function is used to create a new event in the ticket market.
+Parameters:
+initial_price: The initial price set by the event organizer for each ticket.
+total_tickets: The total number of tickets available for the event.
+event_date: The date of the event.
+Get the address of the participant (event organizer) using get_sender().
+Create an Event object with the organizer's address, initial ticket price, total number of tickets, event date, and an empty              vector to store the ticket supply
+Return the created event.
+
+
+2. buy_ticket Function:
+Purpose: This function allows a buyer to purchase a ticket for a specified buying price or the cheapest available price.
+Parameters:
+event: A mutable reference to the event object.
+buying_price: The specified price at which the buyer wants to purchase the ticket (0 if the buyer wants the cheapest ticket).
+buyer: The address of the buyer.
+Steps:
+Check if the event date hasn't passed (assert(event.event_date > current_timestamp(), 1)).
+Check if there are available tickets (assert(event.tickets_sold < event.total_tickets, 2)).
+Find a ticket to purchase based on the specified buying price or the cheapest available ticket.
+Calculate the commission on the ticket price.
+Transfer tokens from the buyer to the event organizer, handling commissions.
+Transfer ownership of the ticket to the buyer.
+Update the event details, incrementing the number of tickets sold.
+
+
+
+3. sell_ticket Function:
+Purpose: This function allows the event organizer to sell a ticket for a specified selling price.
+Parameters:
+event: A mutable reference to the event object.
+selling_price: The selling price set by the organizer for the new ticket.
+Steps:
+Check if the event date hasn't passed (assert(event.event_date > current_timestamp(), 1)).
+Check if there are available tickets (assert(event.tickets_sold < event.total_tickets, 2)).
+Create a new ticket with a unique ID, set the owner as the event organizer, and assign the specified selling price.
+Add the new ticket to the event's ticket supply.
+Update the event details, incrementing the number of tickets sold.
+
+
+4. find_cheapest_ticket Function:
+Purpose: This function finds and returns the cheapest available ticket from a vector of tickets.
+Parameters:
+tickets: A reference to a vector of Aptos objects representing the available tickets.
+Steps:
+Initialize variables for the cheapest ticket and the minimum price.
+Iterate through the tickets, comparing prices, and update the variables accordingly.
+Return a reference to the cheapest ticket.
+
+
+5. find_ticket_by_price Function:
+Purpose: This function finds and returns a ticket with a specific price from a vector of tickets.
+Parameters:
+tickets: A reference to a vector of Aptos objects representing the available tickets.
+target_price: The price of the ticket to find.
+Steps:
+Iterate through the tickets and check if the ticket's price matches the target price.
+Return a reference to the found ticket.
+If no ticket is found, raise an assertion error.
+
+
+6. calculate_commission Function:
+Purpose: This function calculates and returns the commission based on the given amount and commission rate.
+Parameters:
+amount: The amount for which the commission needs to be calculated.
+rate: The commission rate.
+Steps:
+Multiply the amount by the commission rate.
+Divide the result by 100 to get the commission amount.
+Return the calculated commission.
+
+
+7. transfer_tokens Function:
+Purpose: This function represents a placeholder for the logic to transfer tokens between addresses.
+Parameters:
+sender: The address from which tokens are being transferred.
+receiver: The address to which tokens are being transferred.
+amount: The amount of tokens to be transferred.
+Steps:
+This function doesn't contain the actual logic for token transfer, as it's dependent on the token standard (not provided in this example).
+You need to implement the token transfer logic based on your specific token standard.
+
+
