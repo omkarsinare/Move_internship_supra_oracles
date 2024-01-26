@@ -1,0 +1,46 @@
+1. initialize_bank Function:
+Purpose: Initializes the bank by creating an ObjectCore representing the bank's ownership.
+Steps:
+Create an ObjectCore instance with the owner set to the bank's address.
+Mint the initial corpus to the bank. The actual token minting logic is a placeholder and should be implemented based on the token standard used.
+
+
+2. apply_for_loan Function:
+Purpose: Allows a customer to apply for a loan.
+Parameters:
+amount: The loan amount requested.
+duration: The duration of the loan in seconds.
+Steps:
+Get the sender's address (borrower) using get_sender().
+Check that the loan amount is greater than 0 and the duration is within specified limits.
+Calculate the interest rate inversely proportional to the duration.
+Create a Loan instance with borrower, amount, interest rate, duration, and initial values for remaining amount, installment amount, penalty rate, prepayment fee rate, last payment timestamp, and status.
+Transfer the loan amount to the borrower. The actual token transfer logic is a placeholder and should be implemented based on the token standard used.
+
+
+3. calculate_installment Function:
+Purpose: Calculates the installment amount for a loan.
+Parameters:
+amount: The loan amount.
+interest_rate: The interest rate for the loan.
+duration: The duration of the loan in seconds.
+Steps:
+Calculate the total interest based on the loan amount, interest rate, and duration.
+Calculate the total payment (amount + total interest).
+Divide the total payment by the loan duration to get the installment amount.
+Return the calculated installment amount.
+
+
+4. make_payment Function:
+Purpose: Handles loan installment payments.
+Parameters:
+loan: A mutable reference to the loan being paid.
+payment_amount: The amount being paid as an installment.
+Steps:
+Get the current timestamp.
+Ensure that the payment is not made before the last payment timestamp and that the payment amount is sufficient.
+Calculate the outstanding amount considering interest accrued since the last payment.
+If the payment amount is greater than the outstanding amount, handle prepayment and charge a fee.
+Calculate the remaining principal after deducting the payment amount.
+If the remaining principal is 0, mark the loan as fully paid; otherwise, check for late payment and apply a penalty if applicable.
+Update the loan details including the remaining amount and the last payment timestamp.
